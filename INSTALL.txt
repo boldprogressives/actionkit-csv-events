@@ -28,7 +28,8 @@ Quick-Start on Heroku
 You will need to create an account on Heroku and install the Heroku Toolbelt.  Then, from
 a terminal:
 
-.. code-block::
+.. code-block:: bash
+
   git clone git://github.com/boldprogressives/actionkit-csv-events.git
   cd actionkit-csv-events
   heroku apps:create
