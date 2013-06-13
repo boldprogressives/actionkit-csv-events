@@ -1,0 +1,9 @@
+venv
+*~
+*pyc
+local_settings.py
+*.sqlite
+#*
+*#
+.#*
+collected_static

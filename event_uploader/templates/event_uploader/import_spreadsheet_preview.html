@@ -1,0 +1,196 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block content %}
+<form method="POST" enctype="multipart/form-data">
+  {% csrf_token %}
+
+  <input type="hidden" name="confirm" value="true" />
+  <label for="campaign">{% blocktrans %}Import Into Which Campaign?{% endblocktrans %}</label>
+  <select id="campaign" name="campaign">
+    <option value="">--</option>
+    {% for campaign in campaigns %}
+    <option value="{{ campaign.name }}">{{ campaign.name }} ({{ campaign.title }})</option>
+    {% endfor %}
+  </select>
+
+      <table>
+	<thead>
+	  <tr>
+	    <th>{% blocktrans %}Title{% endblocktrans %}</th>
+	    <th>{% blocktrans %}Date{% endblocktrans %}</th>
+	    <th>{% blocktrans %}Time{% endblocktrans %}</th>
+	    <th>{% blocktrans %}Venue{% endblocktrans %}</th>
+	    <th>{% blocktrans %}Address{% endblocktrans %}</th>
+	    <th>{% blocktrans %}City{% endblocktrans %}</th>
+	    <th>{% blocktrans %}State{% endblocktrans %}</th>
+	    <th>{% blocktrans %}Zip{% endblocktrans %}</th>
+	    <th>{% blocktrans %}Max Attendees{% endblocktrans %}</th>
+	    <th>{% blocktrans %}Host{% endblocktrans %}</th>
+	    <th>{% blocktrans %}Public Description{% endblocktrans %}</th>
+	    <th>{% blocktrans %}Directions{% endblocktrans %}</th>
+	    <th>{% blocktrans %}Import?{% endblocktrans %}</th>
+	  </tr>
+	</thead>
+	<tbody>
+	{% for event in events %}
+	<tr {% if event.errors %}class="form form_error"{% endif %}>
+	  <td>
+	    <div class="form row {% if event.errors and event.errors.title %}form_error{% endif %}">
+	      <input type="text" name="title_{{ forloop.counter0 }}"
+		     value="{{ event.title }}" />
+	      {% if event.errors %}
+	      {% for error in event.errors.title %}
+	      <label class="form_error">{{ error|escape }}</label>
+	      {% endfor %}
+	      {% endif %}
+	    </div>
+	  </td>
+	  <td>
+	    <div class="form row {% if event.errors and event.errors.date %}form_error{% endif %}">
+	      <input type="text" name="date_{{ forloop.counter0 }}"
+		     value="{{ event.date }}" />
+	      {% if event.errors %}
+	      {% for error in event.errors.date %}
+	      <label class="form_error">{{ error|escape }}</label>
+	      {% endfor %}
+	      {% endif %}
+	    </div>
+	  </td>
+	  <td>
+	    <div class="form row {% if event.errors and event.errors.time %}form_error{% endif %}">
+	      <input type="text" name="time_{{ forloop.counter0 }}"
+		     value="{{ event.time }}" />
+	      {% if event.errors %}
+	      {% for error in event.errors.time %}
+	      <label class="form_error">{{ error|escape }}</label>
+	      {% endfor %}
+	      {% endif %}
+
+	    </div>
+	  </td>
+	  <td>
+	    <div class="form row {% if event.errors and event.errors.venue %}form_error{% endif %}">
+	      <input type="text" name="venue_{{ forloop.counter0 }}"
+		     value="{{ event.venue }}" />
+	      {% if event.errors %}
+	      {% for error in event.errors.venue %}
+	      <label class="form_error">{{ error|escape }}</label>
+	      {% endfor %}
+	      {% endif %}
+
+	    </div>
+	  </td>
+	  <td>
+	    <div class="form row {% if event.errors and event.errors.address %}form_error{% endif %}">
+	      <input type="text" name="address_{{ forloop.counter0 }}"
+		     value="{{ event.address }}" />
+	      {% if event.errors %}
+	      {% for error in event.errors.address %}
+	      <label class="form_error">{{ error|escape }}</label>
+	      {% endfor %}
+	      {% endif %}
+
+	    </div>
+	  </td>
+	  <td>
+	    <div class="form row {% if event.errors and event.errors.city %}form_error{% endif %}">
+	      <input type="text" name="city_{{ forloop.counter0 }}"
+		     value="{{ event.city }}" />
+	      {% if event.errors %}
+	      {% for error in event.errors.city %}
+	      <label class="form_error">{{ error|escape }}</label>
+	      {% endfor %}
+	      {% endif %}
+
+	    </div>
+	  </td>
+	  <td>
+	    <div class="form row {% if event.errors and event.errors.state %}form_error{% endif %}">
+	      <input type="text" name="state_{{ forloop.counter0 }}"
+		     value="{{ event.state }}" />
+	      {% if event.errors %}
+	      {% for error in event.errors.state %}
+	      <label class="form_error">{{ error|escape }}</label>
+	      {% endfor %}
+	      {% endif %}
+
+	    </div>
+	  </td>
+	  <td>
+	    <div class="form row {% if event.errors and event.errors.zip %}form_error{% endif %}">
+	      <input type="text" name="zip_{{ forloop.counter0 }}"
+		     value="{{ event.zip }}" />
+	      {% if event.errors %}
+	      {% for error in event.errors.zip %}
+	      <label class="form_error">{{ error|escape }}</label>
+	      {% endfor %}
+	      {% endif %}
+
+	    </div>
+	  </td>
+	  <td>
+	    <div class="form row {% if event.errors and event.errors.max_attendees %}form_error{% endif %}">
+	      <input type="text" name="max_attendees_{{ forloop.counter0 }}"
+		     value="{{ event.max_attendees }}" />
+	      {% if event.errors %}
+	      {% for error in event.errors.max_attendees %}
+	      <label class="form_error">{{ error|escape }}</label>
+	      {% endfor %}
+	      {% endif %}
+
+	    </div>
+	  </td>
+	  <td>
+	    <div class="form row {% if event.errors and event.errors.host %}form_error{% endif %}">
+	      <input type="text" name="host_{{ forloop.counter0 }}"
+		     value="{{ event.host }}" />
+	      {% if event.errors %}
+	      {% for error in event.errors.host %}
+	      <label class="form_error">{{ error|escape }}</label>
+	      {% endfor %}
+	      {% endif %}
+
+	    </div>
+	  </td>
+	  <td>
+	    <div class="form row {% if event.errors and event.errors.public_description %}form_error{% endif %}">
+	      <input type="text" name="public_description_{{ forloop.counter0 }}"
+		     value="{{ event.public_description }}" />
+	      {% if event.errors %}
+	      {% for error in event.errors.public_description %}
+	      <label class="form_error">{{ error|escape }}</label>
+	      {% endfor %}
+	      {% endif %}
+
+	    </div>
+	  </td>
+	  <td>
+	    <div class="form row {% if event.errors and event.errors.directions %}form_error{% endif %}">
+	      <input type="text" name="directions_{{ forloop.counter0 }}"
+		     value="{{ event.directions }}" />
+	      {% if event.errors %}
+	      {% for error in event.errors.directions %}
+	      <label class="form_error">{{ error|escape }}</label>
+	      {% endfor %}
+	      {% endif %}
+
+	    </div>
+	  </td>
+	  <td>
+	    <input type="checkbox" name="confirm_{{ forloop.counter0 }}"
+		   checked="checked" />
+	  </td>
+	</tr>
+	</tbody>
+	{% endfor %}
+      </table> 
+
+    
+    <div class="submit-row" > 
+      <input type="submit" value="{% blocktrans %}Upload spreadsheet{% endblocktrans %}" class="default btn btn-warning" /> 
+    </div>
+  </div>
+  
+</form>
+{% endblock %}

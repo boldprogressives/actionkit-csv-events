@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load url from future %}
+
+{% block content %}
+<a href="{% url 'import_events' %}">
+  {% blocktrans %}Upload a CSV to import a batch of events{% endblocktrans %}
+</a>
+{% endblock %}

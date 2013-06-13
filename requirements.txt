@@ -1,0 +1,12 @@
+celery
+chardet
+djangohelpers
+django-actionkit-client==0.2
+
+django-dbtemplates
+dj-database-url==0.2.1
+Django==1.4.5
+django-debug-toolbar
+gunicorn
+psycopg2
+mysql-python

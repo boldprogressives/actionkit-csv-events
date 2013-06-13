@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+
+{% block content %}
+<form method="POST" enctype="multipart/form-data">
+  {% csrf_token %}
+
+  <div>
+    <fieldset class="module aligned">
+      <div class="form-row users">
+	<div> 
+	  <label for="users">{% blocktrans %}Upload a CSV{% endblocktrans %}</label>
+	  <input type="file" id="events" name="events" />
+	</div>
+      </div>
+    </fieldset>
+    
+    <div class="submit-row" > 
+      <input type="submit" value="{% blocktrans %}Upload spreadsheet{% endblocktrans %}"
+             class="default btn btn-info" /> 
+    </div>
+    {% blocktrans %}(Don't worry, you will have a chance to preview the events before they are created){% endblocktrans %}
+  </div>
+
+  <br />
+  <div class="help">
+    {% blocktrans %}Your CSV should look like this:{% endblocktrans %}
+    <br /><br />
+    <pre style="overflow-x: auto; white-space: pre; word-wrap: normal">
+Title,Date,Time,Venue,Address,City,State,Zip,Max Attendees,Host,Public Description,Directions
+NY Event,1/16/2012,13:00:00,Museum of American Finance,48 Wall St,New York,NY,10005,100,ethan@example.com
+NJ Event,1/17/2012,13:00:00,NJ State Museum,205 West State Street,Trenton,NJ,08608,250,jason@example.com,,get there by bus
+CT Event,1/17/2012,16:00:00,Railroad Museum of New England,242 E Main St,Thomaston,CT,06787,50,lammy@example.com,this one has a description but no directions
+</pre>
+  </div>
+</form>
+{% endblock %}
