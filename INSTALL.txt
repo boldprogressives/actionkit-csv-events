@@ -10,24 +10,25 @@ the configuration and making changes to suit your needs.
 
 The Django project will provide:
 
- * Synchronous processing of events
- * A Bootstrap-based base template, a login view, and a homepage
- * All functionality locked down to logged-in users only
- * All logged in users have full access to upload events
- * Django Flat Pages are installed so you can add your own help pages, etc
- * All site templates can be modified through the web using django-dbtemplates
- * Through-the-web access to Django's Admin Site to manage users, templates, and flat pages
+* Synchronous processing of events
+* A Bootstrap-based base template, a login view, and a homepage
+* All functionality locked down to logged-in users only
+* All logged in users have full access to upload events
+* Django Flat Pages are installed so you can add your own help pages, etc
+* All site templates can be modified through the web using django-dbtemplates
+* Through-the-web access to Django's Admin Site to manage users, templates, and flat pages
 
 The core functionality is provided in an isolated Django app called "event_uploader".  This
 can be integrated into any larger Django project, if the provided Django project does not
 meet your needs.
 
-== Quick-Start on Heroku ==
+Quick-Start on Heroku
+=====================
 
 You will need to create an account on Heroku and install the Heroku Toolbelt.  Then, from
 a terminal:
 
-{{{
+``
 git clone git://github.com/boldprogressives/actionkit-csv-events.git
 cd actionkit-csv-events
 heroku apps:create
@@ -36,7 +37,7 @@ python standalone_django_project/required_environ.py env_vars
 heroku config:set `cat env_vars`
 heroku run python manage.py syncdb
 heroku open
-}}}
+``
 
 You will be prompted for input a few times during the installation -- for example
 to provide API and database credentials to your Actionkit instance, and to create
@@ -44,15 +45,16 @@ a new Django superuser to log in to the site.  When this is done, a web browser
 will open and prompt you to log in using the username and password for the Django
 superuser that you just created.
 
-== Deficiencies ==
+Deficiencies
+============
 
 As mentioned above, this setup lacks several important components of a secure, 
 maintainable production infrastructure.  For example:
 
- * Static files are served locally from the Heroku environment instead of e.g. S3
- * No system is set up to capture access and error logs (e.g. Papertrail)
- * The site is served over HTTP instead of HTTPS
- * Events are uploaded synchronously, instead of asynchronously (e.g. using Celery)
+* Static files are served locally from the Heroku environment instead of e.g. S3
+* No system is set up to capture access and error logs (e.g. Papertrail)
+* The site is served over HTTP instead of HTTPS
+* Events are uploaded synchronously, instead of asynchronously (e.g. using Celery)
 
 If you plan on leaving this web application running for a long time and using it
 heavily, setting up your own installation instead of relying on this quick-start
