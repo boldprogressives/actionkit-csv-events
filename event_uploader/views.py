@@ -51,7 +51,7 @@ def _import_events(request):
                 events.append(event_data)
 
     if has_errors:
-        campaigns = EventCampaign.objects.using("ak").all()
+        campaigns = EventCampaign.objects.using("ak").all().order_by("-id")
         return _import_events_preview(request, locals())
         
     for event in events:
@@ -123,7 +123,7 @@ def import_events_spreadsheet(request):
             raise
             return redirect(".")
 
-    campaigns = EventCampaign.objects.using("ak").all()
+    campaigns = EventCampaign.objects.using("ak").all().order_by("-id")
     return _import_events_preview(request, locals())
 
 @rendered_with("event_uploader/import_spreadsheet_preview.html")
