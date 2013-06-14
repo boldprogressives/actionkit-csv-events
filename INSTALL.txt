@@ -41,8 +41,36 @@ heroku open
 You will be prompted for input a few times during the installation -- for example
 to provide API and database credentials to your Actionkit instance, and to create
 a new Django superuser to log in to the site.  When this is done, a web browser
-will open and prompt you to log in using the username and password for the Django
-superuser that you just created.
+will open and prompt you to log in.  
+
+You should log in using the username and password for the Django superuser that you 
+just created.
+
+== Debugging ==
+
+If something goes wrong, you can run the following command in a terminal to view the
+application's logs as you interact with the site:
+
+{{{
+heroku logs -t
+}}}
+
+That might provide enough information to figure out the problem.  If not, you can 
+switch the site into debug mode by running:
+
+{{{
+heroku config:set DJANGO_DEBUG=1 DJANGO_DEBUG_TOOLBAR=1 INTERNAL_IPS=*
+}}}
+
+This will cause the site to display detailed debugging information in the browser
+when any error occurs.  It will also cause the site to have a "debug mode" sidebar
+that can be expanded on any page to view detailed SQL logs and other information.
+
+When you're finished debugging, you should take the site out of debug mode by running:
+
+{{{
+heroku config:unset DJANGO_DEBUG DJANGO_DEBUG_TOOLBAR INTERNAL_IPS
+}}}
 
 == Deficiencies ==
 
