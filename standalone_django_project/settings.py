@@ -4,7 +4,7 @@ ACTIONKIT_EVENT_UPLOADER_PROCESSING_METHOD = "sync"
 
 PROJECT_ROOT = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
 ROOT_URLCONF = 'standalone_django_project.urls'
-WSGI_APPLICATION = 'standalong_django_project.wsgi.application'
+WSGI_APPLICATION = 'standalone_django_project.wsgi.application'
 SITE_ID = 1
 
 SITE_NAME = os.environ.get("SITE_NAME")

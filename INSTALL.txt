@@ -39,7 +39,6 @@ a terminal:
   heroku run python manage.py syncdb
   heroku open
 
-
 You will be prompted for input a few times during the installation -- for example
 to provide API and database credentials to your Actionkit instance, and to create
 a new Django superuser to log in to the site.  When this is done, a web browser
@@ -47,6 +46,9 @@ will open and prompt you to log in.
 
 You should log in using the username and password for the Django superuser that you 
 just created.
+
+After logging in, visit /admin/actionkit/test_connection/ in the browser to confirm
+that your Actionkit database and API connection are properly configured.
 
 == Debugging ==
 
@@ -73,6 +75,23 @@ When you're finished debugging, you should take the site out of debug mode by ru
 {{{
 heroku config:unset DJANGO_DEBUG DJANGO_DEBUG_TOOLBAR INTERNAL_IPS
 }}}
+
+Quick-Start for Local Development
+=================================
+
+To develop and run the system locally looks similar to running on Heroku:
+
+.. code-block:: bash
+
+  git clone git://github.com/boldprogressives/actionkit-csv-events.git
+  cd actionkit-csv-events
+  virtualenv venv
+  ./venv/bin/pip install -r requirements.txt
+  ./venv/bin/python standalone_django_project/required_environ.py env_vars
+  export `cat env_vars`
+  export DATABASE_URL=sqlite:///`pwd`/dev.sqlite
+  ./venv/bin/python manage.py syncdb
+  ./venv/bin/python manage.py runserver
 
 Deficiencies
 ============

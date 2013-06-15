@@ -9,6 +9,8 @@ urlpatterns = patterns(
 
     url('^$', 'standalone_django_project.views.home', name='home'),
     url('', include('event_uploader.urls')),
+
+    url(r'^admin/actionkit/test_connection/', 'standalone_django_project.views.actionkit_test_connection'),
     url(r'^admin/', include(admin.site.urls)),
 
     url(r'^static/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.STATIC_ROOT}),
