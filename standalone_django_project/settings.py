@@ -15,14 +15,18 @@ else:
     DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 
+ACTIONKIT_DATABASE_NAME = os.environ['ACTIONKIT_DATABASE_NAME']
+ACTIONKIT_DATABASE_USER = os.environ['ACTIONKIT_DATABASE_USER']
+ACTIONKIT_DATABASE_PASSWORD = os.environ['ACTIONKIT_DATABASE_PASSWORD']
+
 import dj_database_url
 DATABASES = {
     'default': dj_database_url.config(),
     'ak': {
         'ENGINE': "django.db.backends.mysql",
-        'NAME': os.environ['ACTIONKIT_DATABASE_NAME'],
-        'USER': os.environ['ACTIONKIT_DATABASE_USER'],
-        'PASSWORD': os.environ['ACTIONKIT_DATABASE_PASSWORD'],
+        'NAME': ACTIONKIT_DATABASE_NAME,
+        'USER': ACTIONKIT_DATABASE_USER,
+        'PASSWORD': ACTIONKIT_DATABASE_PASSWORD,
         'HOST': "client-db.actionkit.com",
         'PORT': "",
         }

@@ -1,9 +1,11 @@
 from actionkit import Client as get_client
 from django.conf import settings
+from actionkit.models import CoreUser
 from django.contrib.auth.decorators import user_passes_test
 from django.http import HttpResponse
 from django.utils.translation import ugettext_lazy as _
 from djangohelpers.lib import allow_http, rendered_with
+import MySQLdb
 import socket
 import xmlrpclib
 
@@ -33,4 +35,13 @@ def actionkit_test_connection(request):
             return HttpResponse(_("The Actionkit API user \"%(username)s\" does not have the required permissions.  The API user will need Superuser (but not Staff) status.  Please double check the user's permissions in the Actionkit Admin.  Log into Actionkit, select the Users tab, and select \"Add staff user.\"") % {'username': settings.ACTIONKIT_API_USER})
         else:
             raise
+
+    try:
+        user = CoreUser.objects.using("ak").get(id=1)
+    except MySQLdb.OperationalError, e:
+        if e.args[0] == 1045:
+            return HttpResponse(_("Could not connect to the Actionkit datatabase -- please double check your ACTIONKIT_DATABASE_USER (\"%(user)s\"), ACTIONKIT_DATABASE_PASSWORD and ACTIONKIT_DATABASE_NAME (\"%(name)s\") settings.") % {'user': settings.ACTIONKIT_DATABASE_USER, 'name': settings.ACTIONKIT_DATABASE_NAME})
+        else:
+            raise
+
     return HttpResponse(_("Everything's looking good! %(msg)s") % {'msg': version})
